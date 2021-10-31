@@ -21,11 +21,11 @@ exports.listFetch = async (req, res) => {
 exports.deleteEvent = async (req, res) => {
   try {
     const event = await Event.findById(req.params.eventId);
-    if (event) {
+    if (req.body) {
+      const deleteMany = await Event.deleteMany({ _id: eventId }, req.body);
+    } else {
       await event.remove();
       return res.status(204).end();
-    } else {
-      return res.status(404).json("event not found");
     }
   } catch (error) {
     console.log(error);
@@ -74,3 +74,15 @@ exports.fullyBookedEvent = async (req, res) => {
     return res.status(500).json({ message: error.message });
   }
 };
+
+exports.searchEvent = async (req,res) => {
+  try{
+   
+    const search = await Event.find().filter((query) => query.name.toLowerCase().includes());
+    return res.json(search);
+  
+} catch (error) {
+  return res.status(500).json({ message: error.message });
+}
+
+
