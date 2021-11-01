@@ -75,14 +75,12 @@ exports.fullyBookedEvent = async (req, res) => {
   }
 };
 
-exports.searchEvent = async (req,res) => {
-  try{
-   
-    const search = await Event.find().filter((query) => query.name.toLowerCase().includes());
+exports.searchEvent = async (req, res) => {
+  try {
+    // const search = await Event.find({req.query})
+
     return res.json(search);
-  
-} catch (error) {
-  return res.status(500).json({ message: error.message });
-}
-
-
+  } catch (error) {
+    return res.status(500).json({ message: error.message });
+  }
+};

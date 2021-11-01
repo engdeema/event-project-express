@@ -16,7 +16,7 @@ router.get("/", listFetch);
 router.put("/:eventId", updateEvent);
 router.delete("/:eventId", deleteEvent);
 router.get("/fullybooked", fullyBookedEvent);
-router.get("/search", searchEvent);
+router.get("/:search", searchEvent);
 router.get("/:eventId", detailEvent);
 
 module.exports = router;
